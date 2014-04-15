@@ -9,6 +9,7 @@ var server = require('http').createServer(handler),
     mimeTypes = {
         '.html': 'text/html',
         '.js': 'text/javascript',
+        '.min.js': 'text/javascript',
         '.css': 'text/css',
         '.png': 'image/png',
         '.gif': 'image/gif',
@@ -77,6 +78,7 @@ function handler(request, response) {
                 response.writeHead(200, {
                     'Content-Type': mimeTypes[path.extname(lookup)]
                 });
+                console.log( mimeTypes[path.extname(lookup)])
                 response.end(data);
             });
 
