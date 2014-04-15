@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <title>WebChat</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+        <script src="node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.min.js"></script>
+        <script src="node_modules/moment/min/moment.min.js"></script>
+        <link rel="shortcut icon" href="strike-sms.png">
+        <script src="node_modules/underscore/underscore-min.js"></script>
+        <script src="jquery2.min.js"></script>
+        <script src="bootstrap.min.js"></script>
+        <script src="client.js"></script>
+        <style>
+            .bs-docs-nav {
+                text-shadow: 0 -1px 0 rgba(0, 0, 0, .15);
+                background-color: #563d7c;
+                border-color: #463265;
+                box-shadow: 0 1px 0 rgba(255, 255, 255, .1);
+            }
+            .bs-docs-nav .navbar-brand {
+                color: #fff;
+            }
+            .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+                color: #fff;
+                background-color: transparent;
+            }
+            .btn-primary {
+                color: #fff;
+                background-color: #563d7c;
+                border-color: #463265;
+            }
+            .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+                color: #fff;
+                background-color: #563def;
+                border-color: #463265;
+            }
+            .bs-docs-nav .navbar-nav > .active > a, .bs-docs-nav .navbar-nav > .active > a:hover {
+                color: #fff;
+                background-color: #463265;
+            }
+            .bs-docs-nav .navbar-nav > li > a {
+                color: #cdbfe3;
+            }
+            body {
+                font-family:'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+                background: #ddd;
+            }
+            a:hover, a:focus {
+                color: #2a6496;
+                text-decoration: none;
+            }
+            pre {
+                display: block;
+                padding: 9.5px;
+                margin: 0 0 10px;
+                font-size: 14px;
+                line-height: 1.428571429;
+                color: #333;
+                word-break: break-all;
+                word-wrap: break-word;
+                background-color: #f5f5f5;
+                border: 1px solid #ccc;
+                border-radius: 7px;
+            }
+            code, kbd, pre, samp {
+                font-family:'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-inverse  bs-docs-nav" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">WebChat</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chats <span class="glyphicon glyphicon-chevron-down"></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#"><span class="glyphicon glyphicon-home"> Open/Universal chat</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="options.html"><span class="glyphicon glyphicon-cog"></span></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>Send a Message</h4>
+                    <textarea style="resize:vertical;" id="textarea" class="form-control"></textarea>
+                    <a id="send" class="btn btn-primary" href="#"><span class="glyphicon glyphicon-send"></span></a>
+                </div>
+                <div class="col-lg-6">
+                    <br />
+                    <br />
+                    <div id="connected" class="list-group">
+                        <a href="#" class="list-group-item active">
+                            <span class="badge" id="sents">0</span>
+                            <span class="glyphicon glyphicon-user"></span>You</a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <p id="status" class="text-danger">Not Connected</p>
+                    <h5>Conversation:</h5>
+                    <pre id="log" style="overflow:scroll; resize:vertical; height: 323px;">
+                        <p class="text-info">Connecting to server...</p>
+                        <br />
+                    </pre>
+                    <a class="btn btn-sm btn-danger" id="clear">Clear Chat <span class="glyphicon glyphicon-trash"></span></a>
+                    <a class="btn btn-sm btn-default" id="clear" onclick="updateMe()">Update Me <span class="glyphicon glyphicon-refresh"></span></a>
+                </div>
+            </div>
+            <!-- Site footer -->
+            <div class="footer">
+                <p>&copy; Strike-SMS 2013</p>
+            </div>
+        </div>
+        <!-- /container -->
+        <!-- Bootstrap core JavaScript==================================================-
+        ->
+    <!-- Placed at the end of the document so the pages load faster -->
+    </body>
+
+</html>
